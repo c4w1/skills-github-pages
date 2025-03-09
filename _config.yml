@@ -1,5 +1,5 @@
-title: Your Blog Name
-description: A blog about modern life, with occasional interspersing of schizophrenic level pattern matching 
+title: YAOB
+description: Yet Another Opiniated Blog about modern life, with occasional interspersing of schizophrenic level pattern matching.
 theme: minima
 plugins:
   - jekyll-feed
