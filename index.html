@@ -102,6 +102,46 @@
                 font-size: 2rem;
             }
         }
+.timeline {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .timeline-bar {
+            position: relative;
+            width: 80%;
+            height: 5px;
+            background-color: #8b5cf6;
+        }
+        .timeline-arrow {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #3b82f6;
+            transition: left 0.3s ease;
+        }
+        .timeline-milestones {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-top: 10px;
+        }
+        .milestone {
+            font-size: 0.8rem;
+            color: #333;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
