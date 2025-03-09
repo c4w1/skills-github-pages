@@ -1,31 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Productivity Paradox</title>
-    <meta charset="utf-8">
     <style>
+        :root {
+            --ctp-base: #1e1e2e;
+            --ctp-text: #cdd6f4;
+            --ctp-rosewater: #f5e0dc;
+            --ctp-flamingo: #f2cdcd;
+            --ctp-mauve: #cba6f7;
+            --ctp-pink: #f5c2e7;
+            --ctp-red: #f38ba8;
+            --ctp-yellow: #f9e2af;
+            --ctp-green: #a6e3a1;
+            --ctp-blue: #89b4fa;
+            --ctp-sky: #89dceb;
+            --ctp-lavender: #b4befe;
+            --ctp-surface: #313244;
+        }
+
         body {
+            background-color: var(--ctp-base);
+            color: var(--ctp-text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            font-family: system-ui, sans-serif;
-            line-height: 1.6;
+            padding: 2rem;
         }
-        pre {
-            background: #f5f5f5;
-            padding: 15px;
-            overflow-x: auto;
+
+        h1, h2, h3 {
+            color: var(--ctp-lavender);
+            margin-top: 2.5rem;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--ctp-surface);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            color: var(--ctp-pink);
+            font-size: 2rem;
+        }
+
+        a {
+            color: var(--ctp-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         .chart {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin: 20px 0;
+            background-color: var(--ctp-surface);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid var(--ctp-mauve);
         }
+
+        blockquote {
+            border-left: 4px solid var(--ctp-yellow);
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            color: var(--ctp-rosewater);
+            font-style: italic;
+        }
+
+        pre {
+            background-color: var(--ctp-surface);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--ctp-mauve);
+        }
+
+        code {
+            font-family: "Fira Code", Monaco, Consolas, monospace;
+            color: var(--ctp-green);
+        }
+
         hr {
             border: 0;
-            height: 1px;
-            background: #ccc;
-            margin: 40px 0;
+            height: 2px;
+            background: var(--ctp-surface);
+            margin: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -33,10 +108,10 @@
     <article>
         <h1>The Productivity Paradox</h1>
         <h2>Rethinking our obsession with getting things done</h2>
-        
+
         <h2>Intro</h2>
-        <p>It feels like productivity has become...</p>
-        
+        <p>It feels like productivity has become the prevailing virtue of our time. We have to get more done, forever. Of course, for the individual, this is wholly unsustainable. The battle to be productive enough is unwinnable. Indeed, chasing productivity can have devastating consequences on your well-being, both physical and psychological. It's difficult though - our unrelenting thirst for productivity is the reason for so many modern luxuries. Productivity is not inherently bad at all; in fact, work can be immensely rewarding. But our entire lives and our self-worth should not revolve around being productive. Yet, a survey in late 2022 found that productivity is most people's number one priority in life.</p>
+
         <div class="chart">
             <h3>Survey Results (Late 2022)</h3>
             <ul>
@@ -44,14 +119,39 @@
                 <li>63% of Americans</li>
                 <li>58% of Australians</li>
             </ul>
+            <p>Ranked Productivity above:</p>
+            <ul>
+                <li>Physical Health</li>
+                <li>Having More Money</li>
+                <li>Happiness</li>
+            </ul>
         </div>
 
         <hr>
 
         <h2>How We Got Here</h2>
-        <p>The Protestant work ethic...</p>
+        <p>The Protestant work ethic is an idea that says hard work gets you into heaven, while laziness is basically sinful. This concept was pretty foundational to America's early economic development. The Protestants came to America, worked hard, and built businesses to earn God's favor, and in theory, that idea still lingers with us today. While Protestant work ethic may still be relevant to the conversation, there are also more contemporary factors at play. After all, we don't mix Red Bull and Adderall to earn God's favor. We just want to make some money.</p>
 
-        <!-- Rest of your content -->
+        <!-- Continue with the rest of your content following the same pattern -->
+
+        <h2>Burnout</h2>
+        <p>It's tremendously easy to wrap your sense of self-worth up in productivity...</p>
+
+        <h2>"Optimizing"</h2>
+        <p>There is a massive industry around optimizing productivity...</p>
+
+        <h2>What is "Productive"</h2>
+        <p>It would be tremendously easy to sit here and say "Well, you should just stop going to work..."</p>
+
+        <pre><code>The Useless Tree Story:
+A carpenter comes upon a massive, ancient tree with gnarled bark...
+"I have long strived for uselessness."
+        </code></pre>
+
+        <blockquote>
+            "Burnout is the sickness of a society that cannot tolerate pauses."
+            <footer>- Byung-Chul Han</footer>
+        </blockquote>
 
     </article>
 </body>
