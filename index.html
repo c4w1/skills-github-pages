@@ -102,23 +102,23 @@
                 font-size: 2rem;
             }
         }
-.timeline {
+        .timeline {
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
-            background-color: #f5f5f5;
+            right: 0;
+            background-color: var(--ctp-surface);
+        }
+        .timeline-content {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
         }
         .timeline-bar {
             position: relative;
-            width: 80%;
+            width: 100%;
             height: 5px;
-            background-color: #8b5cf6;
+            background-color: var(--ctp-lavender);
         }
         .timeline-arrow {
             position: absolute;
@@ -128,19 +128,8 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 10px solid #3b82f6;
+            border-bottom: 10px solid var(--ctp-blue);
             transition: left 0.3s ease;
-        }
-        .timeline-milestones {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-            margin-top: 10px;
-        }
-        .milestone {
-            font-size: 0.8rem;
-            color: #333;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -180,6 +169,7 @@
         <p>The activities that we often categorize as the least productive, relaxing idle hobbies that require very little effort, can make us the happiest. And as far as producing in a professional context, if someone builds a company and wants that company to be as productive as possible, perhaps they should squeeze the systems harder, not the people. Instead of asking employees to individually produce more, and sacrifice their personal lives, we should all ask our systems of work to produce more. When your boss tells you the company needs to increase productivity, perhaps that's his problem to solve. Not yours. Henry Ford was not a hero of the working class by any stretch of the imagination. But he didn't just tell people to build more cars. He created the assembly line. As it stands though, we cannot even engage in these conversations, it's up to the individual alone to output more work. Any attempt to manage ones workload can be and often is seen as pure laziness. So next time you skip lunch to work, consider: What are you producing? For who? And why? I would argue that creating happiness certainly counts as being productive.</p>
 </body>
 <div class="timeline">
+    <div class="timeline-content">
         <div class="timeline-bar">
             <div class="timeline-arrow"></div>
         </div>
@@ -187,12 +177,13 @@
             <div class="milestone" data-section="intro">Intro</div>
             <div class="milestone" data-section="how-we-got-here">How We Got Here</div>
             <div class="milestone" data-section="burnout">Burnout</div>
-            <div class="milestone" data-section="optimizing">Optimizing</div>
+            <div class="milestone" data-section="optimizing">"Optimizing"</div>
             <div class="milestone" data-section="what-is-productive">What is "Productive"</div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('h2[id]');
             const milestones = document.querySelectorAll('.milestone');
@@ -217,8 +208,8 @@
                 const currentMilestone = document.querySelector(`.milestone[data-section="${currentSectionId}"]`);
                 if (currentMilestone) {
                     const milestoneRect = currentMilestone.getBoundingClientRect();
-                    const timelineRect = timelineBar.getBoundingClientRect();
-                    const arrowPosition = milestoneRect.left - timelineRect.left + (milestoneRect.width / 2) - 10;
+                    const timelineBarRect = timelineBar.getBoundingClientRect();
+                    const arrowPosition = (milestoneRect.left + milestoneRect.width / 2) - timelineBarRect.left;
                     arrow.style.left = `${arrowPosition}px`;
                 }
             }
