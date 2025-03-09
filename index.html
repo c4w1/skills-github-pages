@@ -139,4 +139,52 @@
         <p>To do this, we can look at an old story called "The Useless Tree", by Taoist philosopher Shuang Zhu. In this story, a carpenter comes upon a tree in the forest. It's the most massive tree on the mountain, and the oldest. The bark is gnarled, twisted, and full of knots. These knots mean he can't build anything from the tree's wood, so he says "That tree is useless." Later that night, the tree appears to the carpenter in a dream. It tells him that fruit trees are torn apart as soon as they become ripe. Hardwood trees are demolished as soon as they reach maturity. The tree says "I have long strived for uselessness." Because for this tree, this "uselessness", is the reason it lived longer and grew larger than any other tree in the forest. Consider the squirrels that eat this trees acorns, or the insects that live on the tree's branches, or the creatures that find shade underneath its canopy. Would they call the tree useless? I think not. Just like the carpenter and his usefulness, our definition of productivity seems to be very narrow.</p>
         <p>The activities that we often categorize as the least productive, relaxing idle hobbies that require very little effort, can make us the happiest. And as far as producing in a professional context, if someone builds a company and wants that company to be as productive as possible, perhaps they should squeeze the systems harder, not the people. Instead of asking employees to individually produce more, and sacrifice their personal lives, we should all ask our systems of work to produce more. When your boss tells you the company needs to increase productivity, perhaps that's his problem to solve. Not yours. Henry Ford was not a hero of the working class by any stretch of the imagination. But he didn't just tell people to build more cars. He created the assembly line. As it stands though, we cannot even engage in these conversations, it's up to the individual alone to output more work. Any attempt to manage ones workload can be and often is seen as pure laziness. So next time you skip lunch to work, consider: What are you producing? For who? And why? I would argue that creating happiness certainly counts as being productive.</p>
 </body>
+<div class="timeline">
+        <div class="timeline-bar">
+            <div class="timeline-arrow"></div>
+        </div>
+        <div class="timeline-milestones">
+            <div class="milestone" data-section="intro">Intro</div>
+            <div class="milestone" data-section="how-we-got-here">How We Got Here</div>
+            <div class="milestone" data-section="burnout">Burnout</div>
+            <div class="milestone" data-section="optimizing">Optimizing</div>
+            <div class="milestone" data-section="what-is-productive">What is "Productive"</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('h2[id]');
+            const milestones = document.querySelectorAll('.milestone');
+            const arrow = document.querySelector('.timeline-arrow');
+            const timelineBar = document.querySelector('.timeline-bar');
+
+            function getCurrentSection() {
+                let currentSection = sections[0];
+                for (const section of sections) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2) {
+                        currentSection = section;
+                    } else {
+                        break;
+                    }
+                }
+                return currentSection.id;
+            }
+
+            function updateArrowPosition() {
+                const currentSectionId = getCurrentSection();
+                const currentMilestone = document.querySelector(`.milestone[data-section="${currentSectionId}"]`);
+                if (currentMilestone) {
+                    const milestoneRect = currentMilestone.getBoundingClientRect();
+                    const timelineRect = timelineBar.getBoundingClientRect();
+                    const arrowPosition = milestoneRect.left - timelineRect.left + (milestoneRect.width / 2) - 10;
+                    arrow.style.left = `${arrowPosition}px`;
+                }
+            }
+
+            window.addEventListener('scroll', updateArrowPosition);
+            updateArrowPosition();
+        });
+    </script>
 </html>
