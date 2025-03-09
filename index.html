@@ -1,16 +1,58 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Productivity Paradox</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: system-ui, sans-serif;
+            line-height: 1.6;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .chart {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>The Productivity Paradox</h1>
+        <h2>Rethinking our obsession with getting things done</h2>
+        
+        <h2>Intro</h2>
+        <p>It feels like productivity has become...</p>
+        
+        <div class="chart">
+            <h3>Survey Results (Late 2022)</h3>
+            <ul>
+                <li>65% of Brits</li>
+                <li>63% of Americans</li>
+                <li>58% of Australians</li>
+            </ul>
+        </div>
 
-<div class="home">
-  <h1>Latest Posts</h1>
-  
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        <span class="post-date">{{ post.date | date_to_string }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+        <hr>
+
+        <h2>How We Got Here</h2>
+        <p>The Protestant work ethic...</p>
+
+        <!-- Rest of your content -->
+
+    </article>
+</body>
+</html>
