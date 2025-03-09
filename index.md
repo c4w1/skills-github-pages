@@ -1,4 +1,70 @@
----
-title: Welcome to my blog
+# The Productivity Paradox
+*Rethinking our obsession with getting things done*
+
+## Intro
+
+It feels like productivity has become the prevailing virtue of our time. We have to get more done, forever. Of course, for the individual, this is wholly unsustainable. The battle to be productive enough is unwinnable. Indeed, chasing productivity can have devastating consequences on your well-being, both physical and psychological. It's difficult though, our unrelenting thirst for productivity is the reason for so many modern luxuries. Productivity is not inherently bad at all, in fact, work can be immensely rewarding. But our entire lives and our self-worth should not revolve around being productive. Yet, a survey in late 2022 found that productivity is most people's number one priority in life.
+
+- 65% of Brits
+- 63% of Americans
+- 58% of Australians
+
+Ranked Productivity above:         
+
+- Physical Health
+- Having More Money
+- And Happiness
+
+Unfortunately, this lust for productivity is bad for everything. It crushes our souls, and ironically, crushes our ability to gets things done. So, how can we rethink productivity, rest, and the idea of getting things done? Well to answer that, we need to figure out how we got here.
+
 ---
 
+## How We Got Here
+
+The Protestant work ethic is an idea that says hard work gets you into heaven, while laziness is basically sinful. This concept was pretty foundational to America's early economic development. The Protestants came to America, worked hard, and built businesses to earn God's favor, and in theory, that idea still lingers with us today. While Protestant work ethic may still be relevant to the conversation, there are also more contemporary factors at play. After all, we don't mix Red Bull and Adderall to earn God's favor. We just want to make some money.
+
+It would be also be easy to blame capitalism for our obsession with productivity. But that would be like blaming gravity for an airplane crash. Assigning the blame is technically accurate, but only in an abstract and not really helpful sort of way. The roots of our obsession with productivity stem from the transition out of the Industrial Revolution.
+
+To understand why productivity became so personal—and so destructive—we can turn to philosopher Byung-Chul Han's distinction between the "disciplinary society" of the past and today's "achievement society."
+
+During the Industrial Revolution, we increased productivity by increasing the efficiency of systems. Bosses shouted "You must not!" Workers were chained to their machines until their shifts were over. Efficiency meant better machines, smarter workflows, and assembly lines. The enemy was external: a boss, a bell, a quota.
+
+By the 1960s, jobs moved from factories to desks. Still, maintaining and increasing productivity was as important as ever. But we stopped trying to improve systems. Instead, we began trying to improve productivity on a macro level by doing so on a micro level. No one was interested in making an office operate better, but instead, how to make an office worker, work harder. The burden of improving output shifted from the organization, onto the worker. The mantra shifted from "You must not!" to "Yes you can!" Han calls this the rise of the **"entrepreneur of the self"**—a world where you no longer answer to a foreman, but to yourself. Productivity got personal. We chase self-optimization like medieval monks chased heaven—except our salvation is a promotion, not God.
+
+Han writes: *"The achievement-subject is its own slave driver."* We don't need bosses to yell—we yell at ourselves.
+
+This shift explains why "productivity culture" feels so inescapable. In the disciplinary era, you could clock out. In the achievement society, _you are the clock_. Depression isn't just sadness—it's the body's strike against endless self-exploitation. Anxiety isn't nerves—it's the terror of failing your own potential. Loneliness isn't isolation—it's the cost of turning relationships into networking opportunities.
+
+Han puts it bluntly: _"Burnout is the sickness of a society that cannot tolerate pauses."_ We medicate, therapize, and biohack our symptoms, but the real cure is to stop treating ourselves like machines.
+
+This idea becomes silly when you consider the refinement of systems in the Industrial Revolution didn't happen in an instant. Creating efficient factory systems happened quickly, perhaps, but not overnight. Henry Ford invested massive amounts of money and time into developing new tools, methods, and infrastructure. But today, we casually expect ourselves to wake up and invent the assembly line, every single day; and not only do we need to optimize our productivity, but we need to keep executing our current workload at the same time. We're still stuck in this archaic, post-Ford way of thinking. More is always better. There is no upper limit to the output we expect people to produce. When you expect people to buy into this idea you put their professional interests up against their personal life. You can get more work done, just skip the bike ride with your wife. You can get this turned in tomorrow, just eat your lunch at your desk. Our personal and professional lives are now stuck in a Cold War. Eventually, one will crumble. And today, it feels exceedingly clear, which side is winning.
+
+This is difficult to grapple with because, well, productivity is good. Everyone does a little bit of work towards a common goal, and all of our lives are improved, in theory. So it's pretty easy to justify this endless sprint. The most productive members of our society are also generally lauded as heroes. On the opposite side, not being productive means you're lazy, and laziness today is seen as ethically wrong. The historical context of productivity mixes with contemporary cultural forces to create our problem; and it is a problem indeed. Allowing productivity to take over our lives is well, killing us.
+
+---
+
+## Burnout
+
+It's tremendously easy to wrap your sense of self-worth up in productivity. You make a to-do list, you don't get everything done, and then you feel like a failure. Or perhaps this sounds familiar. You cram as much as you can into your workday, then you get home, too exhausted to do anything but sit on your phone for three hours. Then, you feel lazy about not being productive, despite all of this happening as an effect of being too productive throughout your day. This is basically mini-burnout every single day. See, if you determine your self-worth by how much you get done, you will be forever worthless. There will be always more that you could've done. The mountain has no summit.
+
+As you focus entirely on productivity, you obviously focus less on other things. Healthy, natural foods become processed, ready-to-eat meals. Breakfast becomes gray smoothies that guarantee an efficient mix of nutrients, minus any of the joy involved in actually eating. You spend less time with the people you love, leaving them feeling estranged, and likely less interested in being part of your life. You drink Celsius or whatever, so you can get five hours of sleep, when in reality, this lack of sleep proves time and time again, to significantly reduce cognitive abilities, which in turn, makes you less productive. Low stakes hobbies you love fall by the wayside, zapping the joy out of your day to day life. At the end of this, you're left with some swirl of depression, anxiety, and loneliness. This is nothing to say for the physical effects of an unbalanced life, which include increased risk of heart attacks, stroke, and a whole lot more. But hey, your to-do list is looking pretty good. Until of course, tomorrow. When this whole thing starts all over.
+
+---
+
+## "Optimizing"
+
+There is a massive industry around optimizing productivity. This takes the form of books, self-help gurus, YouTube channels, TikTokers, and any other format you can imagine. Fortunately, none of these things work. In fact, optimizing productivity is a great way to guarantee you'll be less productive. Take any specific productivity hack. Putting butter in your coffee, time blocking, mushroom tea, this is just one more thing for you to do. These productivity hacks just expand your to-do list. Then, when you forget to do them, as you inevitably will, because you already have too much to do, you're left feeling like a failure all over again. You just have one more thing that you couldn't quite get to in a day. The thing is, cramming more and more into your day in some unending arms race for productivity, only leads to burnout.
+
+Burnout is defined as a manifestation of chronic unmitigated stress. During periods of burnout, your body has higher levels of stress hormones. It's a physically observable phenomenon. Intense burnout can lead to depression, insomnia, loss of appetite, even suicidal ideations. Tiredness is your body's warning sign for burnout. It's like an alert. Your body telling you to tell you to take a break because things are about to get bad. But in today's energy drink world we ignore this warning. We don't take breaks. We drink caffeine, then we get a promotion for working so hard.
+
+In reality though, rest is what matters, and there's no shortage of literature to prove this. Resting helps your brain focus, helps you get more done. Proper sleep has a profound effect on cognition and memory. Psychiatrist and researcher Nancy C Andresen coined the acronym REST in the 1990s. Random Episodic Silent Thought. This term describes the intensely creative neural activity that occurs when . . . you do nothing. According to her lifetime of study, periods of inactivity are the most productive on a neurological level. Andresen has studied creative people from all walks of life, and found that Eureka moments usually come right after long periods of brain inactivity. That said, this type of advice is basically a trap. It's just another way to get ourselves to be more productive. Is relaxation really worthwhile if it's only in service of productivity? I'm not so sure. So, what if we re-examine this idea of productivity from the ground up?
+
+---
+
+## What is "Productive"
+
+It would be tremendously easy to sit here and say "Well, you should just stop going to work, stop working so hard." But the reality is, not everyone can do that; in fact, most people can't. A single mother raising three kids just can't make time for a walk in the woods every day. It's not happening. But I do believe relaxation is still that mother's right. Our culture has taken this right away from her, but it's still a right. So our focus should not be on stamping that right out of existence entirely, but instead, redefining how we see productivity and what things count as being "productive".
+
+To do this, we can look at an old story called "The Useless Tree", by Taoist philosopher Shuang Zhu. In this story, a carpenter comes upon a tree in the forest. It's the most massive tree on the mountain, and the oldest. The bark is gnarled, twisted, and full of knots. These knots mean he can't build anything from the tree's wood, so he says "That tree is useless." Later that night, the tree appears to the carpenter in a dream. It tells him that fruit trees are torn apart as soon as they become ripe. Hardwood trees are demolished as soon as they reach maturity. The tree says "I have long strived for uselessness." Because for this tree, this "uselessness", is the reason it lived longer and grew larger than any other tree in the forest. Consider the squirrels that eat this trees acorns, or the insects that live on the tree's branches, or the creatures that find shade underneath its canopy. Would they call the tree useless? I think not. Just like the carpenter and his usefulness, our definition of productivity seems to be very narrow.
+
+The activities that we often categorize as the least productive, relaxing idle hobbies that require very little effort, can make us the happiest. And as far as producing in a professional context, if someone builds a company and wants that company to be as productive as possible, perhaps they should squeeze the systems harder, not the people. Instead of asking employees to individually produce more, and sacrifice their personal lives, we should all ask our systems of work to produce more. When your boss tells you the company needs to increase productivity, perhaps that's his problem to solve. Not yours. Henry Ford was not a hero of the working class by any stretch of the imagination. But he didn't just tell people to build more cars. He created the assembly line. As it stands though, we cannot even engage in these conversations, it's up to the individual alone to output more work. Any attempt to manage ones workload can be and often is seen as pure laziness. So next time you skip lunch to work, consider: What are you producing? For who? And why? I would argue that creating happiness certainly counts as being productive.
