@@ -3,3 +3,5 @@ description: Yet Another Opiniated Blog about modern life, with occasional inter
 theme: minima
 plugins:
   - jekyll-feed
+url: "https://c4w1.github.io"
+baseurl: ""
