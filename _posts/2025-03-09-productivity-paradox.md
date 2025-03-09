@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Productivity Paradox"
-date: 2024-02-20
+date: 2025-03-09
 subtitle: Rethinking our obsession with getting things done
 ---
 
