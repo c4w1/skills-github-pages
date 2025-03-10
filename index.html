@@ -1,221 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The Productivity Paradox explores our unyielding obsession with productivity and its impact on our lives." />
     <title>The Productivity Paradox</title>
     <style>
         :root {
-            --ctp-base: #1e1e2e;
-            --ctp-text: #cdd6f4;
-            --ctp-rosewater: #f5e0dc;
-            --ctp-flamingo: #f2cdcd;
-            --ctp-mauve: #cba6f7;
-            --ctp-pink: #f5c2e7;
-            --ctp-red: #f38ba8;
-            --ctp-yellow: #f9e2af;
-            --ctp-green: #a6e3a1;
-            --ctp-blue: #89b4fa;
-            --ctp-sky: #89dceb;
-            --ctp-lavender: #b4befe;
-            --ctp-surface: #313244;
+            --base: #1a1a1a;
+            --text: #e0e0e0;
+            --accent: #FF6B6B;
+            --surface: #2d2d2d;
+            --tooltip-bg: rgba(40, 40, 40, 0.95);
         }
-
+        /* Light mode variables */
+        :root.light {
+            --base: #f0f0f0;
+            --text: #333;
+            --accent: #FF6B6B;
+            --surface: #ddd;
+            --tooltip-bg: rgba(220, 220, 220, 0.95);
+        }
         body {
-            background-color: var(--ctp-base);
-            color: var(--ctp-text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            /* The background gradient is initially static; background-position will be updated on wheel events */
+            background: linear-gradient(45deg, var(--base), var(--surface));
+            background-size: 400% 400%;
+            background-position: center 0px;
+            color: var(--text);
+            font-family: 'Georgia', serif;
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
+            transition: background 0.5s ease, color 0.5s ease;
+            position: relative;
         }
-
-        h1, h2, h3 {
-            color: var(--ctp-lavender);
-            margin-top: 2.5rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            border-bottom: 2px solid var(--ctp-surface);
-            padding-bottom: 1rem;
-        }
-
-        h2 {
-            color: var(--ctp-pink);
-            font-size: 2rem;
-        }
-
-        a {
-            color: var(--ctp-blue);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .chart {
-            background-color: var(--ctp-surface);
-            padding: 1.5rem;
-            border-radius: 8px;
+        h1, h2 {
+            color: var(--accent);
             margin: 2rem 0;
-            border: 1px solid var(--ctp-mauve);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideIn 0.8s forwards;
         }
-
-        blockquote {
-            border-left: 4px solid var(--ctp-yellow);
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-            color: var(--ctp-rosewater);
-            font-style: italic;
+        h1 {
+            font-size: 2.8rem;
+            border-bottom: 3px solid var(--surface);
+            padding-bottom: 1rem;
+            animation-delay: 0.2s;
         }
-
-        pre {
-            background-color: var(--ctp-surface);
-            padding: 1.5rem;
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            animation-delay: 0.4s;
+        }
+        p {
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+        .tooltip {
+            position: relative;
+            border-bottom: 1px dotted var(--accent);
+            cursor: help;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background-color: var(--tooltip-bg);
+            color: var(--text);
+            padding: 1rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            border: 1px solid var(--surface);
+        }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Sidebar – desktop only */
+        .sidebar {
+            position: fixed;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: var(--surface);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+            z-index: 100;
+        }
+        .sidebar-item {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
-            overflow-x: auto;
-            border: 1px solid var(--ctp-mauve);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+            padding-right: 2rem;
         }
-
-        code {
-            font-family: "Fira Code", Monaco, Consolas, monospace;
-            color: var(--ctp-green);
+        .sidebar-item:hover:not(.current) {
+            background-color: var(--base);
         }
-
-        hr {
-            border: 0;
-            height: 2px;
-            background: var(--ctp-surface);
-            margin: 3rem 0;
+        .sidebar-item.read {
+            opacity: 0.7;
         }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-                font-size: 1rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
+        .sidebar-item.read::after {
+            content: '✓';
+            position: absolute;
+            right: 0.5rem;
+            color: var(--accent);
+        }
+        .sidebar-item.current {
+            background-color: var(--accent);
+            color: #fff;
         }
         .timeline {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: var(--ctp-surface);
+            height: 4px;
+            background: var(--surface);
         }
-        .timeline-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 10px 0;
-        }
-        .timeline-bar {
-            position: relative;
-            width: 100%;
-            height: 5px;
-            background-color: var(--ctp-lavender);
-        }
-        .timeline-arrow {
-            position: absolute;
-            top: -10px;
-            left: 0;
+        .timeline-progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent), #FFD166);
             width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid var(--ctp-blue);
-            transition: left 0.3s ease;
+            transition: width 0.3s ease;
+        }
+        section {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        section.visible {
+            opacity: 1;
+        }
+        @keyframes fadeSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Dark/Light toggle button */
+        #mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--surface);
+            color: var(--text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 1100;
+        }
+        #mode-toggle:hover {
+            background-color: var(--accent);
+            color: #fff;
+        }
+        /* Back-to-top button */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            z-index: 1100;
+            transition: opacity 0.3s ease;
+        }
+        #back-to-top.show {
+            display: block;
+            opacity: 0.8;
+        }
+        #back-to-top:hover {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <article>
-        <h1>The Productivity Paradox</h1>
-        <h2>Rethinking our obsession with getting things done</h2>
+<!-- Dark/Light Mode Toggle -->
+<button id="mode-toggle" aria-label="Toggle Light/Dark Mode">Toggle Light/Dark</button>
 
+<nav class="sidebar" aria-label="Section Navigation">
+    <a href="#intro" class="sidebar-item">Intro</a>
+    <a href="#history" class="sidebar-item">History</a>
+    <a href="#burnout" class="sidebar-item">Burnout</a>
+    <a href="#optimizing" class="sidebar-item">Optimizing</a>
+    <a href="#redefining" class="sidebar-item">Redefining</a>
+</nav>
+
+<article>
+    <h1>The Productivity Paradox</h1>
+
+    <!-- Intro Section -->
+    <section id="intro">
         <h2>Intro</h2>
-        <p>It feels like productivity has become the prevailing virtue of our time. We have to get more done, forever. Of course, for the individual, this is wholly unsustainable. The battle to be productive enough is unwinnable. Indeed, chasing productivity can have devastating consequences on your well-being, both physical and psychological. It's difficult though - our unrelenting thirst for productivity is the reason for so many modern luxuries. Productivity is not inherently bad at all; in fact, work can be immensely rewarding. But our entire lives and our self-worth should not revolve around being productive. Yet, a survey in late 2022 found that productivity is most people's number one priority in life. 65% of Brits, 63% of Americans, and 58% of Australians ranked productivity above having a healthy body, having more money, or even being happy.</p>
-        <p>Unfortunately, this lust for productivity is bad for everything; it crushes our souls, and ironically crushes our ability to get things done. So how can we rethink productivity, rest, and the idea of getting things done. Well, to answer that, we need to figure out how we got here.</p>
-        <hr>
+        <p>
+            It feels like productivity has become the <span class="tooltip">prevailing virtue<span class="tooltip-text">The dominant moral standard by which we judge personal worth</span></span>
+            of our time. We have to get more done, forever. Of course, for the individual, this is wholly <span class="tooltip">unsustainable<span class="tooltip-text">Impossible to maintain long-term without severe consequences</span></span>.
+            The battle to be productive enough is unwinnable. Indeed, chasing productivity can have devastating consequences on your well-being,
+            both physical and psychological. It's difficult though – our unrelenting thirst for productivity is the reason for so many modern luxuries.
+            Productivity is not inherently bad; in fact, work can be immensely rewarding. But our entire lives and our self-worth should not revolve
+            around being productive. Yet, a survey in late 2022 found that productivity is most people's number one priority in life.
+        </p>
 
+        <p>
+            Unfortunately, this lust for productivity is bad for everything. It crushes our souls, and ironically, crushes our ability to get things done.
+            So, how can we rethink productivity, rest, and the idea of getting things done? Well to answer that, we need to figure out how we got here.
+        </p>
+        <span class="section-end" data-section="intro"></span>
+    </section>
+
+    <!-- History Section -->
+    <section id="history">
         <h2>How We Got Here</h2>
-        <p>The Protestant work ethic is an idea that says hard work gets you into heaven, while laziness is basically sinful. This concept was pretty foundational to America's early economic development. The Protestants came to America, worked hard, and built businesses to earn God's favor, and in theory, that idea still lingers with us today. While Protestant work ethic may still be relevant to the conversation, there are also more contemporary factors at play. After all, we don't mix Red Bull and Adderall to earn God's favor. We just want to make some money.
-        <p>It would be also be easy to blame capitalism for our obsession with productivity. But that would be like blaming gravity for an airplane crash. Assigning the blame is technically accurate, but only in an abstract and not really helpful sort of way. The roots of our obsession with productivity stem from the transition out of the Industrial Revolution.</p>
-        <p>During the Industrial Revolution, we increased productivity by increasing the efficiency of systems. Think modern farming, assembly lines, et cetera. But then came the rise of office work.</p>
-        <p>In the 1960s, jobs moved from factories to desks. Still, maintaining and increasing productivity was as important as ever. But we stopped trying to improve systems. Instead, we began trying to improve productivity on a macro level by doing so on a micro level. No one was interested in making an office operate better, but instead, how to make an office worker, work harder. The burden of improving output shifted from the organization, onto the worker. Productivity got personal.</p>
-        <p>This idea becomes silly when you consider the refinement of systems in the Industrial Revolution didn't happen in an instant. Creating efficient factory systems happened quickly, perhaps, but not overnight. Henry Ford invested massive amounts of money and time into developing new tools, methods, and infrastructure. But today, we casually expect ourselves to wake up and invent the assembly line, every single day; and not only do we need to optimize our productivity, but we need to keep executing our current workload at the same time. We're still stuck in this archaic, post-Ford way of thinking. More is always better. There is no upper limit to the output we expect people to produce. When you expect people to buy into this idea you put their professional interests up against their personal life. You can get more work done, just skip the bike ride with your wife. You can get this turned in tomorrow, just eat your lunch at your desk. Our personal and professional lives are now stuck in a Cold War. Eventually, one will crumble. And today, it feels exceedingly clear, which side is winning.</p>
-        <p>This is difficult to grapple with because, well, productivity is good. Everyone does a little bit of work towards a common goal, and all of our lives are improved, in theory. So it's pretty easy to justify this endless sprint. The most productive members of our society are also generally lauded as heroes. On the opposite side, not being productive means you're lazy, and laziness today is seen as ethically wrong. The historical context of productivity mixes with contemporary cultural forces to create our problem; and it is a problem indeed. Allowing productivity to take over our lives is well, killing us.</p>
-        <hr>
-        
+        <p>
+            The <span class="tooltip">Protestant work ethic<span class="tooltip-text">16th century Christian belief that hard work demonstrates salvation</span></span>
+            is an idea that says hard work gets you into heaven, while laziness is basically sinful. This concept was pretty foundational to America's early economic development.
+            The Protestants came to America, worked hard, and built businesses to earn God's favor, and in theory, that idea still lingers with us today.
+            While Protestant work ethic may still be relevant, there are also more contemporary factors at play. After all, we don't mix Red Bull and Adderall to earn God's favor.
+            We just want to make some money.
+        </p>
+
+        <p>
+            It would also be easy to blame <span class="tooltip">capitalism<span class="tooltip-text">Economic system based on private ownership and profit motive</span></span>
+            for our obsession with productivity. But that would be like blaming gravity for an airplane crash. The roots of our obsession with productivity stem from the transition out of the
+            <span class="tooltip">Industrial Revolution<span class="tooltip-text">1760-1840: Transition to mechanized manufacturing</span></span>.
+        </p>
+
+        <p>
+            During the Industrial Revolution, we increased productivity by increasing the efficiency of systems. Think modern farming, assembly lines, et cetera.
+            But then came the rise of office work.
+        </p>
+
+        <p>
+            In the 1960s, jobs moved from factories to desks. Still, maintaining and increasing productivity was as important as ever.
+            But we stopped trying to improve systems. Instead, we began trying to improve productivity on a macro level by doing so on a micro level.
+            No one was interested in making an office operate better, but instead, how to make an office worker work harder. The burden of improving output shifted
+            from the organization onto the worker. Productivity got personal.
+        </p>
+
+        <p>
+            This idea becomes silly when you consider the refinement of systems in the Industrial Revolution didn't happen in an instant.
+            Creating efficient factory systems happened quickly, perhaps, but not overnight. <span class="tooltip">Henry Ford<span class="tooltip-text">Founder of Ford Motor Company, pioneer of assembly line production</span></span>
+            invested massive amounts of money and time into developing new tools, methods, and infrastructure. But today, we casually expect ourselves to wake up and invent
+            the assembly line, every single day; and not only do we need to optimize our productivity, but we need to keep executing our current workload at the same time.
+            We're still stuck in this archaic, post-Ford way of thinking. More is always better. There is no upper limit to the output we expect people to produce.
+            When you expect people to buy into this idea you put their professional interests up against their personal life.
+            You can get more work done, just skip the bike ride with your wife. You can get this turned in tomorrow, just eat your lunch at your desk.
+            Our personal and professional lives are now stuck in a Cold War. Eventually, one will crumble. And today, it feels exceedingly clear which side is winning.
+        </p>
+        <span class="section-end" data-section="history"></span>
+    </section>
+
+    <!-- Burnout Section -->
+    <section id="burnout">
         <h2>Burnout</h2>
-        <p>It's tremendously easy to wrap your sense of self-worth up in productivity. You make a to-do list, you don't get everything done, and then you feel like a failure. Or perhaps this sounds familiar. You cram as much as you can into your workday, then you get home, too exhausted to do anything but sit on your phone for three hours. Then, you feel lazy about not being productive, despite all of this happening as an effect of being too productive throughout your day. This is basically mini-burnout every single day. See, if you determine your self-worth by how much you get done, you will be forever worthless. There will be always more that you could've done. The mountain has no summit.</p>
-        <p>As you focus entirely on productivity, you obviously focus less on other things. Healthy, natural foods become processed, ready-to-eat meals. Breakfast becomes gray smoothies that guarantee an efficient mix of nutrients, minus any of the joy involved in actually eating. You spend less time with the people you love, leaving them feeling estranged, and likely less interested in being part of your life. You drink Celsius or whatever, so you can get five hours of sleep, when in reality, this lack of sleep proves time and time again, to significantly reduce cognitive abilities, which in turn, makes you less productive. Low stakes hobbies you love fall by the wayside, zapping the joy out of your day to day life. At the end of this, you're left with some swirl of depression, anxiety, and loneliness. This is nothing to say for the physical effects of an unbalanced life, which include increased risk of heart attacks, stroke, and a whole lot more. But hey, your to-do list is looking pretty good. Until of course, tomorrow. When this whole thing starts all over.</p>
-        <hr>
-        
+        <p>
+            It's tremendously easy to wrap your sense of self-worth up in productivity. You make a to-do list, you don't get everything done, and then you feel like a failure.
+            Or perhaps this sounds familiar. You cram as much as you can into your workday, then you get home, too exhausted to do anything but sit on your phone for three hours.
+            Then, you feel lazy about not being productive, despite all of this happening as an effect of being too productive throughout your day.
+            This is basically mini-burnout every single day. See, if you determine your self-worth by how much you get done, you will be forever worthless.
+            There will be always more that you could've done. The mountain has no summit.
+        </p>
+
+        <p>
+            As you focus entirely on productivity, you obviously focus less on other things. Healthy, natural foods become processed, ready-to-eat meals.
+            Breakfast becomes gray smoothies that guarantee an efficient mix of nutrients, minus any of the joy involved in actually eating.
+            You spend less time with the people you love, leaving them feeling estranged, and likely less interested in being part of your life.
+            You drink Celsius or whatever, so you can get five hours of sleep, when in reality, this lack of sleep proves time and time again,
+            to significantly reduce cognitive abilities, which in turn, makes you less productive. Low stakes hobbies you love fall by the wayside,
+            zapping the joy out of your day-to-day life. At the end of this, you're left with some swirl of depression, anxiety, and loneliness.
+            This is nothing to say for the physical effects of an unbalanced life, which include increased risk of heart attacks, stroke, and a lot more.
+            But hey, your to-do list is looking pretty good. Until of course, tomorrow. When this whole thing starts all over.
+        </p>
+        <span class="section-end" data-section="burnout"></span>
+    </section>
+
+    <!-- Optimizing Section -->
+    <section id="optimizing">
         <h2>"Optimizing"</h2>
-        <p>There is a massive industry around optimizing productivity. This takes the form of books, self-help gurus, YouTube channels, TikTokers, and any other format you can imagine. Fortunately, none of these things work. In fact, optimizing productivity is a great way to guarantee you'll be less productive. Take any specific productivity hack. Putting butter in your coffee, time blocking, mushroom tea, this is just one more thing for you to do. These productivity hacks just expand your to-do list. Then, when you forget to do them, as you inevitably will, because you already have too much to do, you're left feeling like a failure all over again. You just have one more thing that you couldn't quite get to in a day. The thing is, cramming more and more into your day in some unending arms race for productivity, only leads to burnout.</p>
-        <p>Burnout is defined as a manifestation of chronic unmitigated stress. During periods of burnout, your body has higher levels of stress hormones. It's a physically observable phenomenon. Intense burnout can lead to depression, insomnia, loss of appetite, even suicidal ideations. Tiredness is your body's warning sign for burnout. It's like an alert. Your body telling you to tell you to take a break because things are about to get bad. But in today's energy drink world we ignore this warning. We don't take breaks. We drink caffeine, then we get a promotion for working so hard.</p>
-        <p>In reality though, rest is what matters, and there's no shortage of literature to prove this. Resting helps your brain focus, helps you get more done. Proper sleep has a profound effect on cognition and memory. Psychiatrist and researcher Nancy C Andresen coined the acronym REST in the 1990s. Random Episodic Silent Thought. This term describes the intensely creative neural activity that occurs when . . . you do nothing. According to her lifetime of study, periods of inactivity are the most productive on a neurological level. Andresen has studied creative people from all walks of life, and found that Eureka moments usually come right after long periods of brain inactivity. That said, this type of advice is basically a trap. It's just another way to get ourselves to be more productive. Is relaxation really worthwhile if it's only in service of productivity? I'm not so sure. So, what if we re-examine this idea of productivity from the ground up?</p>
-        <hr>
-        
+        <p>
+            There is a massive industry around optimizing productivity. This takes the form of books, self-help gurus, YouTube channels,
+            TikTokers, and any other format you can imagine. Fortunately, none of these things work. In fact, optimizing productivity
+            is a great way to guarantee you'll be less productive. Take any specific productivity hack. Putting butter in your coffee,
+            time blocking, mushroom tea, this is just one more thing for you to do. These productivity hacks just expand your to-do list.
+            Then, when you forget to do them, as you inevitably will, because you already have too much to do, you're left feeling like a failure
+            all over again. You just have one more thing that you couldn't quite get to in a day. The thing is, cramming more and more into your day
+            in some unending arms race for productivity, only leads to burnout.
+        </p>
+
+        <p>
+            Burnout is defined as a manifestation of chronic unmitigated stress. During periods of burnout, your body has higher levels of stress hormones.
+            It's a physically observable phenomenon. Intense burnout can lead to depression, insomnia, loss of appetite, even suicidal ideation.
+            Tiredness is your body's warning sign for burnout. It's like an alert. Your body telling you to take a break because things are about to get bad.
+            But in today's energy drink world we ignore this warning. We don't take breaks. We drink caffeine, then we get a promotion for working so hard.
+        </p>
+
+        <p>
+            In reality though, rest is what matters, and there's no shortage of literature to prove this. Resting helps your brain focus,
+            helps you get more done. Proper sleep has a profound effect on cognition and memory. Psychiatrist and researcher Nancy C Andresen
+            coined the acronym REST in the 1990s. Random Episodic Silent Thought. This term describes the intensely creative neural activity
+            that occurs when... you do nothing. According to her lifetime of study, periods of inactivity are the most productive on a neurological level.
+            Andresen has studied creative people from all walks of life, and found that Eureka moments usually come right after long periods of brain inactivity.
+            That said, this type of advice is basically a trap. It's just another way to get ourselves to be more productive. Is relaxation really worthwhile
+            if it's only in service of productivity? I'm not so sure. So, what if we re-examine this idea of productivity from the ground up?
+        </p>
+        <span class="section-end" data-section="optimizing"></span>
+    </section>
+
+    <!-- Redefining Section -->
+    <section id="redefining">
         <h2>What is "Productive"</h2>
-        <p>It would be tremendously easy to sit here and say "Well, you should just stop going to work, stop working so hard." But the reality is, not everyone can do that; in fact, most people can't. A single mother raising three kids just can't make time for a walk in the woods every day. It's not happening. But I do believe relaxation is still that mother's right. Our culture has taken this right away from her, but it's still a right. So our focus should not be on stamping that right out of existence entirely, but instead, redefining how we see productivity and what things count as being "productive".</p>
-        <p>To do this, we can look at an old story called "The Useless Tree", by Taoist philosopher Shuang Zhu. In this story, a carpenter comes upon a tree in the forest. It's the most massive tree on the mountain, and the oldest. The bark is gnarled, twisted, and full of knots. These knots mean he can't build anything from the tree's wood, so he says "That tree is useless." Later that night, the tree appears to the carpenter in a dream. It tells him that fruit trees are torn apart as soon as they become ripe. Hardwood trees are demolished as soon as they reach maturity. The tree says "I have long strived for uselessness." Because for this tree, this "uselessness", is the reason it lived longer and grew larger than any other tree in the forest. Consider the squirrels that eat this trees acorns, or the insects that live on the tree's branches, or the creatures that find shade underneath its canopy. Would they call the tree useless? I think not. Just like the carpenter and his usefulness, our definition of productivity seems to be very narrow.</p>
-        <p>The activities that we often categorize as the least productive, relaxing idle hobbies that require very little effort, can make us the happiest. And as far as producing in a professional context, if someone builds a company and wants that company to be as productive as possible, perhaps they should squeeze the systems harder, not the people. Instead of asking employees to individually produce more, and sacrifice their personal lives, we should all ask our systems of work to produce more. When your boss tells you the company needs to increase productivity, perhaps that's his problem to solve. Not yours. Henry Ford was not a hero of the working class by any stretch of the imagination. But he didn't just tell people to build more cars. He created the assembly line. As it stands though, we cannot even engage in these conversations, it's up to the individual alone to output more work. Any attempt to manage ones workload can be and often is seen as pure laziness. So next time you skip lunch to work, consider: What are you producing? For who? And why? I would argue that creating happiness certainly counts as being productive.</p>
+        <p>
+            It would be tremendously easy to sit here and say "Well, you should just stop going to work, stop working so hard." But the reality is,
+            not everyone can do that; in fact, most people can't. A single mother raising three kids just can't make time for a walk in the woods every day.
+            It's not happening. But I do believe relaxation is still that mother's right. Our culture has taken this right away from her, but it's still a right.
+            So our focus should not be on stamping that right out of existence entirely, but instead, redefining how we see productivity and what things count as being "productive".
+        </p>
+
+        <p>
+            To do this, we can look at an old story called "The Useless Tree", by <span class="tooltip">Taoist<span class="tooltip-text">Chinese philosophy emphasizing harmony with natural order</span></span> philosopher
+            Shuang Zhu. In this story, a carpenter comes upon a tree in the forest. It's the most massive tree on the mountain, and the oldest.
+            The bark is gnarled, twisted, and full of knots. These knots mean he can't build anything from the tree's wood, so he says "That tree is useless."
+            Later that night, the tree appears to the carpenter in a dream. It tells him that fruit trees are torn apart as soon as they become ripe.
+            Hardwood trees are demolished as soon as they reach maturity. The tree says "I have long strived for uselessness." Because for this tree,
+            this "uselessness", is the reason it lived longer and grew larger than any other tree in the forest. Consider the squirrels that eat this tree's acorns,
+            or the insects that live on the tree's branches, or the creatures that find shade underneath its canopy. Would they call the tree useless? I think not.
+            Just like the carpenter and his usefulness, our definition of productivity seems to be very narrow.
+        </p>
+
+        <p>
+            The activities that we often categorize as the least productive, relaxing idle hobbies that require very little effort,
+            can make us the happiest. And as far as producing in a professional context, if someone builds a company and wants that company to be as productive as possible,
+            perhaps they should squeeze the systems harder, not the people. Instead of asking employees to individually produce more, and sacrifice their personal lives,
+            we should all ask our systems of work to produce more. When your boss tells you the company needs to increase productivity, perhaps that's his problem to solve.
+            Not yours. I would argue that creating happiness certainly counts as being productive.
+        </p>
+        <span class="section-end" data-section="redefining"></span>
+    </section>
+</article>
+
 <div class="timeline">
-    <div class="timeline-content">
-        <div class="timeline-bar">
-            <div class="timeline-arrow"></div>
-        </div>
-        <div class="timeline-milestones">
-            <div class="milestone" data-section="intro">Intro</div>
-            <div class="milestone" data-section="how-we-got-here">How We Got Here</div>
-            <div class="milestone" data-section="burnout">Burnout</div>
-            <div class="milestone" data-section="optimizing">"Optimizing"</div>
-            <div class="milestone" data-section="what-is-productive">What is "Productive"</div>
-        </div>
-    </div>
+    <div class="timeline-progress" id="timeline-progress"></div>
 </div>
 
+<!-- Back-to-Top Button -->
+<button id="back-to-top" aria-label="Back to Top">↑</button>
+
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('h2[id]');
-            const milestones = document.querySelectorAll('.milestone');
-            const arrow = document.querySelector('.timeline-arrow');
-            const timelineBar = document.querySelector('.timeline-bar');
+    // Timeline Progress
+    window.addEventListener('scroll', () => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollTop = window.scrollY;
+        document.getElementById('timeline-progress').style.width = `${(scrollTop / scrollHeight) * 100}%`;
 
-            function getCurrentSection() {
-                let currentSection = sections[0];
-                for (const section of sections) {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight / 2) {
-                        currentSection = section;
-                    } else {
-                        break;
-                    }
-                }
-                return currentSection.id;
-            }
+        const backToTop = document.getElementById('back-to-top');
+        if (scrollTop > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
 
-            function updateArrowPosition() {
-                const currentSectionId = getCurrentSection();
-                const currentMilestone = document.querySelector(`.milestone[data-section="${currentSectionId}"]`);
-                if (currentMilestone) {
-                    const milestoneRect = currentMilestone.getBoundingClientRect();
-                    const timelineBarRect = timelineBar.getBoundingClientRect();
-                    const arrowPosition = (milestoneRect.left + milestoneRect.width / 2) - timelineBarRect.left;
-                    arrow.style.left = `${arrowPosition}px`;
-                }
-            }
-
-            window.addEventListener('scroll', updateArrowPosition);
-            updateArrowPosition();
+    // Smooth Scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
         });
-    </script>
+    });
+
+    // Mark sections as read
+    const readObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.getAttribute('data-section');
+                const sidebarItem = document.querySelector(`.sidebar-item[href="#${sectionId}"]`);
+                if (sidebarItem) sidebarItem.classList.add('read');
+            }
+        });
+    }, { threshold: 1.0 });
+    document.querySelectorAll('.section-end').forEach(el => readObserver.observe(el));
+
+    // Highlight current section
+    const currentSectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                document.querySelectorAll('.sidebar-item').forEach(item => {
+                    item.classList.remove('current');
+                    if (item.getAttribute('href') === `#${sectionId}`) {
+                        item.classList.add('current');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('section').forEach(section => currentSectionObserver.observe(section));
+
+    // Fade in sections
+    const fadeInObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section').forEach(section => fadeInObserver.observe(section));
+
+    // Dark/Light Mode Toggle
+    const modeToggle = document.getElementById('mode-toggle');
+    modeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('light');
+    });
+
+    // Back-to-Top Button Click
+    document.getElementById('back-to-top').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Background parallax effect: update background position on wheel events.
+    let lastBgPos = 0;
+    window.addEventListener('wheel', () => {
+        // Update the background vertical position based on scrollY.
+        // This creates the impression of looking down a wall.
+        let newPos = window.scrollY * 0.2;
+        document.body.style.backgroundPosition = `center ${newPos}px`;
+    });
+</script>
 </body>
 </html>
